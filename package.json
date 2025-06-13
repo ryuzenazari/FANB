@@ -1,0 +1,19 @@
+{
+  "name": "fanb-web",
+  "version": "1.0.0",
+  "description": "FANB - Focus Arrange Notify Balance - Web App",
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "date-fns": "^4.1.0",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "vue-toastification": "^2.0.0-rc.5"
+  }
+}

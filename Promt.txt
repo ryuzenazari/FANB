@@ -1,0 +1,1937 @@
+## Project Overview
+
+**Tolong buatkan aplikasi web fullstack FANB (Focus Arrange Notify Balance) - sebuah platform manajemen diri yang cerdas dengan integrasi AI Gemini. Ini adalah proyek production-ready yang membutuhkan implementasi lengkap frontend, backend, dan database.**
+
+### Project Details
+- **Nama**: FANB (Focus Arrange Notify Balance)
+- **Tagline**: "Your AI-Powered Personal Management Assistant"
+- **Tujuan**: Platform manajemen diri yang menggunakan AI untuk mengoptimalkan produktivitas dan work-life balance
+- **Target Users**: Professionals, students, freelancers (25-40 tahun) di Indonesia
+
+---
+
+## 🛠 Technology Stack
+
+### Frontend
+- **Build Tool**: Vite untuk development server dan production build yang cepat
+- **Framework**: Vue 3 dengan Composition API dan Single-File Components
+- **Language**: TypeScript untuk type safety dan developer experience
+- **Routing**: Vue Router untuk navigation
+- **State Management**: Pinia untuk state management
+- **Styling**: Tailwind CSS dengan custom components
+- **HTTP Client**: Axios untuk API communication
+- **Real-time**: Socket.io-client untuk live updates  
+- **Forms**: VeeValidate + Yup untuk form handling dan validation
+- **Charts**: Vue-Echarts atau Chart.js untuk data visualization
+- **Icons**: Lucide Vue atau Vue Feather Icons
+- **UI Components**: Custom components dengan Tailwind
+
+### Backend
+- **Runtime**: Node.js 18+
+- **Framework**: Express.js
+- **Database**: MongoDB dengan Mongoose ODM
+- **Authentication**: JWT dengan refresh tokens
+- **Password Hashing**: bcryptjs
+- **Validation**: Joi untuk input validation
+- **File Upload**: Multer untuk handling file uploads
+- **Real-time**: Socket.io untuk live features
+- **Security**: Helmet, CORS, rate limiting
+- **Logging**: Winston untuk application logging
+- **Environment**: dotenv untuk environment variables
+
+### Database
+- **Primary DB**: MongoDB
+- **ODM**: Mongoose dengan schemas dan validation
+- **Indexing**: Optimized indexes untuk query performance
+- **Aggregation**: MongoDB aggregation pipeline untuk analytics
+
+### Development Tools
+- **API Documentation**: Swagger/OpenAPI
+- **Testing**: Vitest untuk unit testing
+- **Containerization**: Docker dengan docker-compose
+- **Code Quality**: ESLint + Prettier
+- **Version Control**: Git dengan proper branching strategy
+
+---
+
+## 📁 Complete Project Structure
+
+### Frontend Structure (Vue dengan Vite)
+```
+frontend/
+├── public/
+│   ├── favicon.ico
+│   └── robots.txt
+├── src/
+│   ├── assets/
+│   │   ├── images/
+│   │   └── styles/
+│   ├── components/
+│   │   ├── layout/
+│   │   │   ├── TheHeader.vue (Navigation bar dengan user menu)
+│   │   │   ├── TheSidebar.vue (Collapsible sidebar navigation)
+│   │   │   ├── TheFooter.vue (Footer dengan links)
+│   │   │   └── MainLayout.vue (Main layout wrapper)
+│   │   ├── auth/
+│   │   │   ├── LoginForm.vue (Login form dengan validation)
+│   │   │   ├── RegisterForm.vue (Registration form)
+│   │   │   ├── ForgotPasswordForm.vue (Password reset request)
+│   │   │   ├── ResetPasswordForm.vue (New password form)
+│   │   │   └── ProtectedRoute.vue (Route protection component)
+│   │   ├── dashboard/
+│   │   │   ├── DashboardWidget.vue (Reusable widget component)
+│   │   │   ├── QuickStats.vue (Statistics cards)
+│   │   │   ├── WeatherWidget.vue (Weather display widget)
+│   │   │   ├── MotivationalQuote.vue (Daily motivational quote)
+│   │   │   ├── RecentActivity.vue (Recent activity feed)
+│   │   │   ├── UpcomingTasks.vue (Today's tasks preview)
+│   │   │   └── QuickActions.vue (Quick action buttons)
+│   │   ├── tasks/
+│   │   │   ├── TaskForm.vue (Add/Edit task form)
+│   │   │   ├── TaskList.vue (Task list dengan filtering)
+│   │   │   ├── TaskItem.vue (Individual task component)
+│   │   │   ├── TaskFilters.vue (Filter dan sort options)
+│   │   │   ├── TaskStats.vue (Task statistics)
+│   │   │   ├── TaskSearch.vue (Search functionality)
+│   │   │   └── BulkActions.vue (Bulk task operations)
+│   │   ├── calendar/
+│   │   │   ├── CalendarView.vue (Main calendar component)
+│   │   │   ├── EventForm.vue (Add/Edit event modal)
+│   │   │   ├── EventList.vue (Events sidebar)
+│   │   │   ├── DatePicker.vue (Custom date picker)
+│   │   │   ├── TimeSlotSelector.vue (Time selection)
+│   │   │   ├── RecurringEventForm.vue (Recurring events)
+│   │   │   └── CalendarExport.vue (Export calendar)
+│   │   ├── ai/
+│   │   │   ├── ChatInterface.vue (Main chat component)
+│   │   │   ├── MessageBubble.vue (Individual message)
+│   │   │   ├── QuickPrompts.vue (Predefined prompts)
+│   │   │   ├── TypingIndicator.vue (AI typing animation)
+│   │   │   ├── ChatHistory.vue (Conversation history)
+│   │   │   ├── VoiceInput.vue (Voice input component)
+│   │   │   └── AIInsights.vue (AI-generated insights)
+│   │   ├── habits/
+│   │   │   ├── HabitForm.vue (Add/Edit habit form)
+│   │   │   ├── HabitGrid.vue (Habits display grid)
+│   │   │   ├── HabitItem.vue (Individual habit card)
+│   │   │   ├── ProgressChart.vue (Habit progress visualization)
+│   │   │   ├── StreakCounter.vue (Streak display)
+│   │   │   ├── HabitCalendar.vue (Calendar view for habits)
+│   │   │   └── HabitStats.vue (Habit statistics)
+│   │   ├── analytics/
+│   │   │   ├── ProductivityChart.vue (Productivity metrics)
+│   │   │   ├── TimeAnalysis.vue (Time usage analysis)
+│   │   │   ├── GoalProgress.vue (Goal achievement tracking)
+│   │   │   ├── InsightsPanel.vue (AI-generated insights)
+│   │   │   ├── ExportData.vue (Data export functionality)
+│   │   │   └── CustomReports.vue (Custom report builder)
+│   │   ├── settings/
+│   │   │   ├── ProfileSettings.vue (User profile management)
+│   │   │   ├── NotificationSettings.vue (Notification preferences)
+│   │   │   ├── ThemeSettings.vue (Theme dan display options)
+│   │   │   ├── DataExport.vue (Export user data)
+│   │   │   ├── AccountSecurity.vue (Password, 2FA settings)
+│   │   │   ├── IntegrationSettings.vue (Third-party integrations)
+│   │   │   └── PrivacySettings.vue (Privacy preferences)
+│   │   └── ui/
+│   │       ├── BaseModal.vue (Reusable modal component)
+│   │       ├── BaseButton.vue (Custom button variants)
+│   │       ├── BaseInput.vue (Form input components)
+│   │       ├── BaseCard.vue (Card layout component)
+│   │       ├── BaseTooltip.vue (Tooltip component)
+│   │       ├── BaseLoading.vue (Loading indicators)
+│   │       ├── BaseToast.vue (Notification toasts)
+│   │       ├── BaseConfirmDialog.vue (Confirmation dialog)
+│   │       ├── BaseDropdown.vue (Dropdown menu)
+│   │       └── BaseBadge.vue (Badge component)
+│   ├── views/
+│   │   ├── LandingView.vue (Homepage untuk visitors)
+│   │   ├── DashboardView.vue (Main dashboard)
+│   │   ├── TasksView.vue (Task management)
+│   │   ├── CalendarView.vue (Calendar view)
+│   │   ├── AIAssistantView.vue (AI chat interface)
+│   │   ├── HabitsView.vue (Habit tracking)
+│   │   ├── AnalyticsView.vue (Analytics dan insights)
+│   │   ├── SettingsView.vue (User settings)
+│   │   ├── ProfileView.vue (User profile)
+│   │   ├── LoginView.vue (Login page)
+│   │   ├── RegisterView.vue (Registration page)
+│   │   ├── ForgotPasswordView.vue (Password reset)
+│   │   ├── NotFoundView.vue (404 error page)
+│   │   └── MaintenanceView.vue (Maintenance mode)
+│   ├── stores/
+│   │   ├── auth.ts (Authentication store dengan Pinia)
+│   │   ├── theme.ts (Theme management)
+│   │   ├── notification.ts (Notifications)
+│   │   └── app.ts (Global app state)
+│   ├── composables/
+│   │   ├── useAuth.ts (Authentication composable)
+│   │   ├── useApi.ts (API calls composable)
+│   │   ├── useLocalStorage.ts (LocalStorage composable)
+│   │   ├── useSocket.ts (Socket.io composable)
+│   │   └── useDebounce.ts (Debounce composable)
+│   ├── services/
+│   │   ├── api.ts (API configuration)
+│   │   ├── auth.ts (Auth service)
+│   │   ├── tasks.ts (Tasks API)
+│   │   ├── calendar.ts (Calendar API)
+│   │   ├── habits.ts (Habits API)
+│   │   ├── ai.ts (AI service)
+│   │   └── socket.ts (Socket.io service)
+│   ├── utils/
+│   │   ├── constants.ts (App constants)
+│   │   ├── helpers.ts (Helper functions)
+│   │   ├── dateUtils.ts (Date utilities)
+│   │   ├── validation.ts (Validation schemas)
+│   │   └── storage.ts (Storage utilities)
+│   ├── types/
+│   │   ├── user.ts (User type definitions)
+│   │   ├── task.ts (Task type definitions)
+│   │   ├── event.ts (Event type definitions)
+│   │   ├── habit.ts (Habit type definitions)
+│   │   ├── api.ts (API response type definitions)
+│   │   └── common.ts (Common type definitions)
+│   ├── router/
+│   │   ├── index.ts (Vue Router setup)
+│   │   └── guards.ts (Navigation guards)
+│   ├── App.vue (Main app component)
+│   ├── main.ts (Application entry point)
+│   └── index.css (Global styles)
+├── index.html (Vite HTML template)
+├── vite.config.ts (Vite configuration)
+├── tailwind.config.ts (Tailwind configuration)
+├── postcss.config.js (PostCSS configuration)
+├── tsconfig.json (TypeScript configuration)
+├── package.json
+└── README.md
+```
+
+### Backend Structure (Node.js + Express)
+```
+backend/
+├── src/
+│   ├── controllers/
+│   │   ├── authController.js (Authentication logic)
+│   │   ├── userController.js (User management)
+│   │   ├── taskController.js (Task CRUD operations)
+│   │   ├── calendarController.js (Calendar/Events)
+│   │   ├── habitController.js (Habit tracking)
+│   │   ├── aiController.js (AI chat integration)
+│   │   ├── analyticsController.js (Analytics data)
+│   │   └── notificationController.js (Notifications)
+│   ├── models/
+│   │   ├── User.js (User schema)
+│   │   ├── Task.js (Task schema)
+│   │   ├── Event.js (Calendar event schema)
+│   │   ├── Habit.js (Habit schema)
+│   │   ├── Conversation.js (AI chat schema)
+│   │   └── Notification.js (Notification schema)
+│   ├── routes/
+│   │   ├── auth.js (Authentication routes)
+│   │   ├── users.js (User routes)
+│   │   ├── tasks.js (Task routes)
+│   │   ├── calendar.js (Calendar routes)
+│   │   ├── habits.js (Habit routes)
+│   │   ├── ai.js (AI routes)
+│   │   ├── analytics.js (Analytics routes)
+│   │   └── notifications.js (Notification routes)
+│   ├── middleware/
+│   │   ├── auth.js (JWT authentication)
+│   │   ├── validation.js (Input validation)
+│   │   ├── errorHandler.js (Error handling)
+│   │   ├── rateLimiter.js (Rate limiting)
+│   │   ├── upload.js (File upload)
+│   │   └── logger.js (Request logging)
+│   ├── services/
+│   │   ├── authService.js (Auth business logic)
+│   │   ├── emailService.js (Email sending)
+│   │   ├── aiService.js (Gemini AI integration)
+│   │   ├── notificationService.js (Push notifications)
+│   │   ├── analyticsService.js (Data analytics)
+│   │   └── cronService.js (Scheduled tasks)
+│   ├── utils/
+│   │   ├── database.js (DB connection)
+│   │   ├── jwt.js (JWT utilities)
+│   │   ├── encryption.js (Encryption helpers)
+│   │   ├── validator.js (Validation schemas)
+│   │   ├── logger.js (Winston logger)
+│   │   └── constants.js (App constants)
+│   ├── config/
+│   │   ├── database.js (DB configuration)
+│   │   ├── server.js (Server configuration)
+│   │   ├── swagger.js (API documentation)
+│   │   └── socket.js (Socket.io configuration)
+│   └── app.js (Express app setup)
+├── tests/
+│   ├── unit/
+│   ├── integration/
+│   └── fixtures/
+├── uploads/ (File upload directory)
+├── logs/ (Log files)
+├── .env.example
+├── package.json
+├── Dockerfile
+├── docker-compose.yml
+└── README.md
+```
+
+---
+
+## 🗄 MongoDB Database Schema
+
+### 1. Users Collection
+```javascript
+{
+  _id: ObjectId,
+  username: String (unique, required, min: 3, max: 30),
+  email: String (unique, required, validated),
+  password: String (hashed with bcrypt, min: 8),
+  profile: {
+    firstName: String (required, max: 50),
+    lastName: String (required, max: 50),
+    avatar: String (URL to profile picture),
+    bio: String (max: 500),
+    dateOfBirth: Date,
+    timezone: String (default: 'Asia/Jakarta'),
+    language: String (default: 'id')
+  },
+  settings: {
+    theme: String (enum: ['light', 'dark', 'auto'], default: 'light'),
+    notifications: {
+      email: Boolean (default: true),
+      push: Boolean (default: true),
+      desktop: Boolean (default: false),
+      taskReminders: Boolean (default: true),
+      habitReminders: Boolean (default: true),
+      weeklyReports: Boolean (default: true)
+    },
+    privacy: {
+      shareData: Boolean (default: false),
+      analytics: Boolean (default: true),
+      publicProfile: Boolean (default: false)
+    },
+    productivity: {
+      workingHours: {
+        start: String (default: '09:00'),
+        end: String (default: '17:00')
+      },
+      timeTracking: Boolean (default: true),
+      breakReminders: Boolean (default: true)
+    }
+  },
+  subscription: {
+    plan: String (enum: ['free', 'premium', 'enterprise'], default: 'free'),
+    startDate: Date,
+    endDate: Date,
+    status: String (enum: ['active', 'inactive', 'cancelled'])
+  },
+  stats: {
+    tasksCompleted: Number (default: 0),
+    habitsLogged: Number (default: 0),
+    streakDays: Number (default: 0),
+    totalSessions: Number (default: 0)
+  },
+  createdAt: Date (default: Date.now),
+  updatedAt: Date (default: Date.now),
+  lastLogin: Date,
+  isActive: Boolean (default: true),
+  emailVerified: Boolean (default: false),
+  twoFactorEnabled: Boolean (default: false)
+}
+```
+
+### 2. Tasks Collection
+```javascript
+{
+  _id: ObjectId,
+  userId: ObjectId (ref: 'User', required),
+  title: String (required, max: 200),
+  description: String (max: 1000),
+  priority: String (enum: ['low', 'medium', 'high', 'urgent'], default: 'medium'),
+  status: String (enum: ['todo', 'in-progress', 'completed', 'cancelled'], default: 'todo'),
+  category: String (max: 50),
+  tags: [String] (max: 10 tags),
+  dueDate: Date,
+  startDate: Date,
+  estimatedTime: Number (minutes),
+  actualTime: Number (minutes),
+  difficulty: Number (1-5 scale),
+  energy: String (enum: ['low', 'medium', 'high']),
+  context: String (enum: ['work', 'personal', 'health', 'learning', 'other']),
+  subtasks: [{
+    _id: ObjectId,
+    title: String (required, max: 200),
+    completed: Boolean (default: false),
+    createdAt: Date (default: Date.now)
+  }],
+  attachments: [{
+    _id: ObjectId,
+    filename: String,
+    originalName: String,
+    mimetype: String,
+    size: Number,
+    url: String,
+    uploadedAt: Date (default: Date.now)
+  }],
+  reminders: [{
+    _id: ObjectId,
+    type: String (enum: ['email', 'push', 'desktop']),
+    time: Date,
+    sent: Boolean (default: false)
+  }],
+  recurring: {
+    enabled: Boolean (default: false),
+    pattern: String (enum: ['daily', 'weekly', 'monthly', 'yearly']),
+    interval: Number (default: 1),
+    daysOfWeek: [Number] (0-6, Sunday = 0),
+    endDate: Date,
+    nextDue: Date
+  },
+  progress: {
+    percentage: Number (0-100, default: 0),
+    milestones: [{
+      _id: ObjectId,
+      title: String,
+      completed: Boolean (default: false),
+      completedAt: Date
+    }]
+  },
+  collaboration: {
+    shared: Boolean (default: false),
+    collaborators: [ObjectId] (ref: 'User'),
+    permissions: String (enum: ['view', 'edit', 'admin'])
+  },
+  createdAt: Date (default: Date.now),
+  updatedAt: Date (default: Date.now),
+  completedAt: Date,
+  archivedAt: Date,
+  isArchived: Boolean (default: false)
+}
+```
+
+### 3. Events Collection (Calendar)
+```javascript
+{
+  _id: ObjectId,
+  userId: ObjectId (ref: 'User', required),
+  title: String (required, max: 200),
+  description: String (max: 1000),
+  startDate: Date (required),
+  endDate: Date (required),
+  allDay: Boolean (default: false),
+  category: String (max: 50),
+  color: String (hex color, default: '#3B82F6'),
+  location: {
+    name: String,
+    address: String,
+    coordinates: {
+      lat: Number,
+      lng: Number
+    }
+  },
+  attendees: [{
+    _id: ObjectId,
+    email: String,
+    name: String,
+    status: String (enum: ['pending', 'accepted', 'declined'])
+  }],
+  reminders: [{
+    _id: ObjectId,
+    type: String (enum: ['email', 'push', 'desktop']),
+    minutes: Number (minutes before event),
+    sent: Boolean (default: false)
+  }],
+  recurring: {
+    enabled: Boolean (default: false),
+    pattern: String (enum: ['daily', 'weekly', 'monthly', 'yearly']),
+    interval: Number (default: 1),
+    daysOfWeek: [Number] (0-6),
+    endDate: Date,
+    exceptions: [Date] (dates to skip)
+  },
+  status: String (enum: ['scheduled', 'in-progress', 'completed', 'cancelled'], default: 'scheduled'),
+  visibility: String (enum: ['private', 'public', 'shared'], default: 'private'),
+  meetingLink: String (URL for virtual meetings),
+  attachments: [{
+    _id: ObjectId,
+    filename: String,
+    url: String,
+    uploadedAt: Date (default: Date.now)
+  }],
+  createdAt: Date (default: Date.now),
+  updatedAt: Date (default: Date.now)
+}
+```
+
+### 4. Habits Collection
+```javascript
+{
+  _id: ObjectId,
+  userId: ObjectId (ref: 'User', required),
+  name: String (required, max: 100),
+  description: String (max: 500),
+  category: String (max: 50),
+  color: String (hex color, default: '#10B981'),
+  icon: String (icon name),
+  frequency: {
+    type: String (enum: ['daily', 'weekly', 'monthly'], default: 'daily'),
+    target: Number (target per period, default: 1),
+    specificDays: [Number] (for weekly: 0-6, for monthly: 1-31)
+  },
+  trackingType: String (enum: ['boolean', 'count', 'time', 'rating'], default: 'boolean'),
+  unit: String (for count/time tracking, e.g., 'minutes', 'glasses', 'pages'),
+  goal: {
+    value: Number,
+    period: String (enum: ['daily', 'weekly', 'monthly'])
+  },
+  logs: [{
+    _id: ObjectId,
+    date: Date (required),
+    value: Schema.Types.Mixed (Boolean, Number, or String based on trackingType),
+    note: String (max: 200),
+    mood: Number (1-5 scale),
+    createdAt: Date (default: Date.now)
+  }],
+  streak: {
+    current: Number (default: 0),
+    longest: Number (default: 0),
+    lastLoggedDate: Date
+  },
+  statistics: {
+    totalLogs: Number (default: 0),
+    successRate: Number (0-100, default: 0),
+    averageValue: Number,
+    bestStreak: Number (default: 0),
+    consistency: Number (0-100, default: 0)
+  },
+  reminders: [{
+    _id: ObjectId,
+    time: String (HH:MM format),
+    days: [Number] (0-6, days of week),
+    enabled: Boolean (default: true),
+    message: String (custom reminder message)
+  }],
+  rewards: [{
+    _id: ObjectId,
+    milestone: Number (streak length),
+    title: String,
+    description: String,
+    achieved: Boolean (default: false),
+    achievedAt: Date
+  }],
+  isActive: Boolean (default: true),
+  startDate: Date (default: Date.now),
+  endDate: Date,
+  createdAt: Date (default: Date.now),
+  updatedAt: Date (default: Date.now)
+}
+```
+
+### 5. Conversations Collection (AI Chat)
+```javascript
+{
+  _id: ObjectId,
+  userId: ObjectId (ref: 'User', required),
+  title: String (conversation title, max: 100),
+  messages: [{
+    _id: ObjectId,
+    role: String (enum: ['user', 'assistant'], required),
+    content: String (required, max: 10000),
+    timestamp: Date (default: Date.now),
+    metadata: {
+      model: String (AI model used),
+      tokens: Number,
+      responseTime: Number (milliseconds),
+      confidence: Number (0-1)
+    }
+  }],
+  context: {
+    type: String (enum: ['general', 'tasks', 'habits', 'calendar', 'analytics']),
+    relatedData: Schema.Types.Mixed (related task/habit/event IDs)
+  },
+  summary: String (conversation summary, max: 500),
+  tags: [String] (conversation tags),
+  sentiment: String (enum: ['positive', 'neutral', 'negative']),
+  priority: String (enum: ['low', 'medium', 'high'], default: 'medium'),
+  status: String (enum: ['active', 'archived', 'deleted'], default: 'active'),
+  lastMessageAt: Date (default: Date.now),
+  messageCount: Number (default: 0),
+  createdAt: Date (default: Date.now),
+  updatedAt: Date (default: Date.now)
+}
+```
+
+### 6. Notifications Collection
+```javascript
+{
+  _id: ObjectId,
+  userId: ObjectId (ref: 'User', required),
+  type: String (enum: ['task_reminder', 'habit_reminder', 'event_reminder', 'system', 'achievement'], required),
+  title: String (required, max: 200),
+  message: String (required, max: 1000),
+  data: Schema.Types.Mixed (additional data like task/habit/event ID),
+  channels: {
+    email: Boolean (default: false),
+    push: Boolean (default: true),
+    inApp: Boolean (default: true)
+  },
+  status: String (enum: ['pending', 'sent', 'delivered', 'failed'], default: 'pending'),
+  priority: String (enum: ['low', 'medium', 'high', 'urgent'], default: 'medium'),
+  scheduledFor: Date,
+  sentAt: Date,
+  readAt: Date,
+  actionUrl: String (deep link to related content),
+  expiresAt: Date,
+  retryCount: Number (default: 0),
+  createdAt: Date (default: Date.now),
+  updatedAt: Date (default: Date.now)
+}
+```
+
+---
+
+## 🔌 API Endpoints Specification
+
+### Authentication Routes (`/api/auth`)
+```javascript
+POST   /api/auth/register          // User registration
+POST   /api/auth/login             // User login  
+POST   /api/auth/logout            // User logout
+POST   /api/auth/refresh           // Refresh JWT token
+POST   /api/auth/forgot-password   // Password reset request
+POST   /api/auth/reset-password    // Reset password with token
+POST   /api/auth/verify-email      // Verify email address
+POST   /api/auth/resend-verification // Resend verification email
+GET    /api/auth/me                // Get current user info
+```
+
+### User Management Routes (`/api/users`)
+```javascript
+GET    /api/users/profile          // Get user profile
+PUT    /api/users/profile          // Update user profile  
+PUT    /api/users/password         // Change password
+DELETE /api/users/account          // Delete user account
+GET    /api/users/settings         // Get user settings
+PUT    /api/users/settings         // Update user settings
+POST   /api/users/upload-avatar    // Upload profile picture
+GET    /api/users/stats            // Get user statistics
+POST   /api/users/export-data      // Export user data
+POST   /api/users/import-data      // Import user data
+```
+
+### Task Management Routes (`/api/tasks`)
+```javascript
+GET    /api/tasks                  // Get all user tasks (with filters)
+POST   /api/tasks                  // Create new task
+GET    /api/tasks/:id              // Get specific task
+PUT    /api/tasks/:id              // Update task
+DELETE /api/tasks/:id              // Delete task
+PUT    /api/tasks/:id/complete     // Mark task as complete
+PUT    /api/tasks/:id/status       // Update task status
+POST   /api/tasks/:id/subtasks     // Add subtask
+PUT    /api/tasks/:id/subtasks/:subId // Update subtask
+DELETE /api/tasks/:id/subtasks/:subId // Delete subtask
+POST   /api/tasks/:id/attachments  // Add attachment
+DELETE /api/tasks/:id/attachments/:attachId // Delete attachment
+GET    /api/tasks/search           // Search tasks
+GET    /api/tasks/stats            // Get task statistics
+POST   /api/tasks/bulk             // Bulk operations on tasks
+GET    /api/tasks/export           // Export tasks data
+```
+
+### Calendar Routes (`/api/calendar`)
+```javascript
+GET    /api/calendar/events        // Get all user events
+POST   /api/calendar/events        // Create new event
+GET    /api/calendar/events/:id    // Get specific event
+PUT    /api/calendar/events/:id    // Update event
+DELETE /api/calendar/events/:id    // Delete event
+GET    /api/calendar/events/date/:date // Get events by date
+GET    /api/calendar/events/range  // Get events in date range
+POST   /api/calendar/events/:id/attendees // Add attendee
+DELETE /api/calendar/events/:id/attendees/:email // Remove attendee
+GET    /api/calendar/availability  // Check availability
+POST   /api/calendar/recurring     // Create recurring event
+GET    /api/calendar/export        // Export calendar (ICS format)
+POST   /api/calendar/import        // Import calendar data
+```
+
+### Habit Tracking Routes (`/api/habits`)
+```javascript
+GET    /api/habits                 // Get all user habits
+POST   /api/habits                 // Create new habit
+GET    /api/habits/:id             // Get specific habit
+PUT    /api/habits/:id             // Update habit
+DELETE /api/habits/:id             // Delete habit
+POST   /api/habits/:id/log         // Log habit completion
+PUT    /api/habits/:id/log/:logId  // Update habit log
+DELETE /api/habits/:id/log/:logId  // Delete habit log
+GET    /api/habits/:id/progress    // Get habit progress
+GET    /api/habits/:id/streak      // Get habit streak info
+GET    /api/habits/stats           // Get habits statistics
+POST   /api/habits/:id/reminders   // Set habit reminders
+GET    /api/habits/calendar        // Get habit calendar view
+```
+
+### AI Assistant Routes (`/api/ai`)
+```javascript
+POST   /api/ai/chat                // Send message to AI
+GET    /api/ai/conversations       // Get chat history
+GET    /api/ai/conversations/:id   // Get specific conversation
+DELETE /api/ai/conversations/:id   // Delete conversation
+POST   /api/ai/conversations       // Create new conversation
+PUT    /api/ai/conversations/:id   // Update conversation title
+POST   /api/ai/suggestions         // Get AI suggestions
+POST   /api/ai/analyze-productivity // Analyze user productivity
+POST   /api/ai/generate-schedule   // Generate optimal schedule
+POST   /api/ai/goal-recommendations // Get goal recommendations
+POST   /api/ai/habit-suggestions   // Get habit suggestions
+GET    /api/ai/insights            // Get AI insights
+```
+
+### Analytics Routes (`/api/analytics`)
+```javascript
+GET    /api/analytics/dashboard     // Get dashboard analytics
+GET    /api/analytics/productivity  // Get productivity metrics
+GET    /api/analytics/time-usage    // Get time usage analysis
+GET    /api/analytics/goals         // Get goal progress
+GET    /api/analytics/habits        // Get habit analytics
+GET    /api/analytics/tasks         // Get task analytics
+GET    /api/analytics/calendar      // Get calendar analytics
+GET    /api/analytics/trends        // Get trend analysis
+GET    /api/analytics/reports       // Get custom reports
+POST   /api/analytics/export        // Export analytics data
+GET    /api/analytics/comparisons   // Compare periods
+GET    /api/analytics/predictions   // Get AI predictions
+```
+
+### Notification Routes (`/api/notifications`)
+```javascript
+GET    /api/notifications           // Get all notifications
+POST   /api/notifications           // Create notification
+PUT    /api/notifications/:id/read  // Mark as read
+DELETE /api/notifications/:id       // Delete notification
+POST   /api/notifications/mark-all-read // Mark all as read
+GET    /api/notifications/unread-count // Get unread count
+PUT    /api/notifications/settings  // Update notification settings
+POST   /api/notifications/test      // Test notification delivery
+GET    /api/notifications/history   // Get notification history
+```
+
+---
+
+## 🎨 UI/UX Design Specifications
+
+### Design System
+```css
+/* Color Palette */
+:root {
+  /* Primary Colors */
+  --primary-50: #eff6ff;
+  --primary-100: #dbeafe;
+  --primary-500: #3b82f6;
+  --primary-600: #2563eb;
+  --primary-700: #1d4ed8;
+
+  /* Secondary Colors */
+  --secondary-50: #f0fdf4;
+  --secondary-100: #dcfce7;
+  --secondary-500: #22c55e;
+  --secondary-600: #16a34a;
+
+  /* Accent Colors */
+  --accent-purple: #8b5cf6;
+  --accent-pink: #ec4899;
+  --accent-orange: #f97316;
+  --accent-yellow: #eab308;
+
+  /* Neutral Colors */
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+
+  /* Status Colors */
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --info: #3b82f6;
+
+  /* Typography */
+  --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Spacing Scale */
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-5: 1.25rem;  /* 20px */
+  --space-6: 1.5rem;   /* 24px */
+  --space-8: 2rem;     /* 32px */
+  --space-10: 2.5rem;  /* 40px */
+  --space-12: 3rem;    /* 48px */
+  --space-16: 4rem;    /* 64px */
+
+  /* Border Radius */
+  --radius-sm: 0.125rem;  /* 2px */
+  --radius-md: 0.375rem;  /* 6px */
+  --radius-lg: 0.5rem;    /* 8px */
+  --radius-xl: 0.75rem;   /* 12px */
+  --radius-2xl: 1rem;     /* 16px */
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+
+  /* Animations */
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 250ms ease-in-out;
+  --transition-slow: 350ms ease-in-out;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --gray-50: #18181b;
+  --gray-100: #27272a;
+  --gray-200: #3f3f46;
+  --gray-300: #52525b;
+  --gray-400: #71717a;
+  --gray-500: #a1a1aa;
+  --gray-600: #d4d4d8;
+  --gray-700: #e4e4e7;
+  --gray-800: #f4f4f5;
+  --gray-900: #fafafa;
+}
+```
+
+### Component Library Specifications
+
+#### Button Component
+```jsx
+// Button variants and states
+const ButtonVariants = {
+  primary: 'bg-primary-600 hover:bg-primary-700 text-white',
+  secondary: 'bg-gray-200 hover:bg-gray-300 text-gray-900',
+  outline: 'border-2 border-primary-600 text-primary-600 hover:bg-primary-50',
+  ghost: 'text-primary-600 hover:bg-primary-50',
+  danger: 'bg-red-600 hover:bg-red-700 text-white'
+};
+
+const ButtonSizes = {
+  sm: 'px-3 py-1.5 text-sm',
+  md: 'px-4 py-2 text-base',
+  lg: 'px-6 py-3 text-lg',
+  xl: 'px-8 py-4 text-xl'
+};
+```
+
+#### Card Component
+```jsx
+const CardVariants = {
+  default: 'bg-white border border-gray-200 shadow-sm',
+  elevated: 'bg-white shadow-lg border-0',
+  outlined: 'bg-white border-2 border-gray-200',
+  filled: 'bg-gray-50 border-0'
+};
+```
+
+### Page Layout Specifications
+
+#### Dashboard Layout
+- **Header**: Fixed height 64px, contains logo, navigation, user menu
+- **Sidebar**: Collapsible, 256px expanded / 64px collapsed
+- **Main Content**: Responsive grid system, min-height calc(100vh - 64px)
+- **Widgets**: Consistent 4:3 aspect ratio cards with hover effects
+
+#### Mobile Responsiveness
+```css
+/* Breakpoints */
+--breakpoint-sm: 640px;
+--breakpoint-md: 768px;
+--breakpoint-lg: 1024px;
+--breakpoint-xl: 1280px;
+--breakpoint-2xl: 1536px;
+
+/* Mobile-first approach */
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-100%); }
+  .main-content { padding: 1rem; }
+  .grid-cols-auto { grid-template-columns: 1fr; }
+}
+```
+
+### TypeScript Implementation
+
+#### Type Definitions
+```typescript
+// types/user.ts
+export interface User {
+  id: string;
+  username: string;
+  email: string;
+  profile: {
+    firstName: string;
+    lastName: string;
+    avatar?: string;
+    bio?: string;
+    dateOfBirth?: Date;
+    timezone: string;
+    language: string;
+  };
+  settings: {
+    theme: 'light' | 'dark' | 'auto';
+    notifications: {
+      email: boolean;
+      push: boolean;
+      desktop: boolean;
+      taskReminders: boolean;
+      habitReminders: boolean;
+      weeklyReports: boolean;
+    };
+  };
+  stats: {
+    tasksCompleted: number;
+    habitsLogged: number;
+    streakDays: number;
+    totalSessions: number;
+  };
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+// types/task.ts
+export type TaskPriority = 'low' | 'medium' | 'high' | 'urgent';
+export type TaskStatus = 'todo' | 'in-progress' | 'completed' | 'cancelled';
+
+export interface Task {
+  id: string;
+  userId: string;
+  title: string;
+  description?: string;
+  priority: TaskPriority;
+  status: TaskStatus;
+  category?: string;
+  tags?: string[];
+  dueDate?: Date;
+  startDate?: Date;
+  estimatedTime?: number;
+  actualTime?: number;
+  subtasks?: {
+    id: string;
+    title: string;
+    completed: boolean;
+    createdAt: Date;
+  }[];
+  createdAt: Date;
+  updatedAt: Date;
+  completedAt?: Date;
+}
+```
+
+#### Component Example
+```vue
+<!-- components/tasks/TaskItem.vue -->
+<template>
+  <BaseCard class="mb-4 hover:shadow-md transition-shadow">
+    <div class="flex items-center justify-between p-4">
+      <div class="flex items-center space-x-3">
+        <input
+          type="checkbox"
+          :checked="task.status === 'completed'"
+          @change="handleStatusChange(task.status === 'completed' ? 'todo' : 'completed')"
+          class="h-5 w-5 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+        />
+        <div>
+          <h3 :class="['text-lg font-medium', task.status === 'completed' ? 'line-through text-gray-500' : '']">
+            {{ task.title }}
+          </h3>
+          <p v-if="task.dueDate" class="text-sm text-gray-500">
+            Due: {{ new Date(task.dueDate).toLocaleDateString() }}
+          </p>
+        </div>
+      </div>
+      
+      <div class="flex items-center space-x-2">
+        <BaseBadge :class="priorityColor">
+          {{ task.priority }}
+        </BaseBadge>
+        <BaseButton 
+          variant="ghost" 
+          size="sm" 
+          @click="$emit('edit', task)"
+        >
+          Edit
+        </BaseButton>
+        <BaseButton 
+          variant="ghost" 
+          size="sm" 
+          class="text-red-600" 
+          @click="$emit('delete', task.id)"
+        >
+          Delete
+        </BaseButton>
+      </div>
+    </div>
+  </BaseCard>
+</template>
+
+<script setup lang="ts">
+import { computed } from 'vue';
+import type { Task, TaskStatus } from '../../types/task';
+import BaseCard from '../ui/BaseCard.vue';
+import BaseBadge from '../ui/BaseBadge.vue';
+import BaseButton from '../ui/BaseButton.vue';
+
+const props = defineProps<{
+  task: Task
+}>();
+
+const emit = defineEmits<{
+  (e: 'complete', id: string): void
+  (e: 'edit', task: Task): void
+  (e: 'delete', id: string): void
+}>();
+
+const handleStatusChange = (newStatus: TaskStatus) => {
+  emit('edit', {
+    ...props.task,
+    status: newStatus
+  });
+};
+
+const priorityColor = computed(() => {
+  const colors = {
+    low: 'bg-blue-100 text-blue-800',
+    medium: 'bg-yellow-100 text-yellow-800',
+    high: 'bg-orange-100 text-orange-800',
+    urgent: 'bg-red-100 text-red-800'
+  };
+  return colors[props.task.priority];
+});
+</script>
+```
+
+#### Composable Example
+```typescript
+// composables/useLocalStorage.ts
+import { ref, watch } from 'vue';
+
+export function useLocalStorage<T>(key: string, initialValue: T) {
+  // State to store our value
+  // Pass initial state function to ref so logic is only executed once
+  const storedValue = ref<T>(getInitialValue());
+  
+  function getInitialValue(): T {
+    if (typeof window === 'undefined') {
+      return initialValue;
+    }
+    
+    try {
+      // Get from local storage by key
+      const item = window.localStorage.getItem(key);
+      // Parse stored json or if none return initialValue
+      return item ? JSON.parse(item) : initialValue;
+    } catch (error) {
+      // If error also return initialValue
+      console.error(`Error reading localStorage key "${key}":`, error);
+      return initialValue;
+    }
+  }
+  
+  // Return a wrapped version of useState's setter function that
+  // persists the new value to localStorage.
+  function setValue(value: T) {
+    try {
+      // Save state
+      storedValue.value = value;
+      // Save to local storage
+      if (typeof window !== 'undefined') {
+        window.localStorage.setItem(key, JSON.stringify(value));
+      }
+    } catch (error) {
+      // A more advanced implementation would handle the error case
+      console.error(`Error setting localStorage key "${key}":`, error);
+    }
+  }
+  
+  // Listen for changes to this localStorage key in other tabs/windows
+  if (typeof window !== 'undefined') {
+    window.addEventListener('storage', (e: StorageEvent) => {
+      if (e.key === key && e.newValue) {
+        storedValue.value = JSON.parse(e.newValue);
+      }
+    });
+  }
+  
+  // Watch for changes to storedValue and update localStorage
+  watch(storedValue, (newValue) => {
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem(key, JSON.stringify(newValue));
+    }
+  }, { deep: true });
+  
+  return { value: storedValue, setValue };
+}
+```
+
+---
+
+## 🤖 AI Integration Specifications
+
+### Gemini AI Integration
+```javascript
+// AI Service Configuration
+const aiConfig = {
+  model: 'gemini-1.5-pro',
+  apiKey: process.env.GEMINI_API_KEY,
+  maxTokens: 2048,
+  temperature: 0.7,
+  safetySettings: [
+    {
+      category: 'HARM_CATEGORY_HARASSMENT',
+      threshold: 'BLOCK_MEDIUM_AND_ABOVE'
+    },
+    {
+      category: 'HARM_CATEGORY_HATE_SPEECH',
+      threshold: 'BLOCK_MEDIUM_AND_ABOVE'
+    }
+  ]
+};
+
+// AI Prompt Templates
+const promptTemplates = {
+  taskAnalysis: `
+    Analyze the following tasks and provide insights on:
+    1. Priority recommendations
+    2. Time estimation accuracy
+    3. Productivity patterns
+    4. Optimization suggestions
+    
+    Tasks: {tasks}
+    User Context: {userContext}
+  `,
+  
+  habitSuggestions: `
+    Based on user's current habits and goals, suggest 3-5 new habits that would:
+    1. Complement existing routines
+    2. Address identified gaps
+    3. Be realistically achievable
+    
+    Current Habits: {habits}
+    Goals: {goals}
+    Lifestyle: {lifestyle}
+  `,
+  
+  scheduleOptimization: `
+    Create an optimal daily schedule considering:
+    1. Task priorities and deadlines
+    2. Energy levels throughout the day
+    3. Existing commitments
+    4. Break and rest periods
+    
+    Tasks: {tasks}
+    Events: {events}
+    Preferences: {preferences}
+  `
+};
+```
+
+### AI Features Implementation
+
+#### Smart Task Prioritization
+```javascript
+const taskPrioritization = async (tasks, userContext) => {
+  const prompt = `
+    Analyze these tasks and rank them by priority considering:
+    - Deadlines and urgency
+    - Impact on goals
+    - Dependencies
+    - User's energy patterns
+    
+    Tasks: ${JSON.stringify(tasks)}
+    Context: ${JSON.stringify(userContext)}
+    
+    Return ranking with explanations.
+  `;
+  
+  return await aiService.generateResponse(prompt);
+};
+```
+
+#### Productivity Insights
+```javascript
+const generateInsights = async (userData) => {
+  const insights = {
+    productivity: await analyzeProductivityPatterns(userData),
+    timeManagement: await analyzeTimeUsage(userData),
+    habitProgress: await analyzeHabitTrends(userData),
+    recommendations: await generateRecommendations(userData)
+  };
+  
+  return insights;
+};
+```
+
+---
+
+## 🔒 Security Implementation
+
+### Authentication & Authorization
+```javascript
+// JWT Configuration
+const jwtConfig = {
+  secret: process.env.JWT_SECRET,
+  accessTokenExpiry: '15m',
+  refreshTokenExpiry: '7d',
+  algorithm: 'HS256'
+};
+
+// Password Policy
+const passwordPolicy = {
+  minLength: 8,
+  requireUppercase: true,
+  requireLowercase: true,
+  requireNumbers: true,
+  requireSpecialChars: true,
+  preventCommonPasswords: true,
+  maxLoginAttempts: 5,
+  lockoutDuration: 15 // minutes
+};
+
+// Rate Limiting
+const rateLimitConfig = {
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: 'Too many requests from this IP',
+  standardHeaders: true,
+  legacyHeaders: false
+};
+```
+
+### Data Encryption
+```javascript
+// Encryption Service
+const encryptionService = {
+  algorithm: 'aes-256-gcm',
+  keyDerivation: 'pbkdf2',
+  saltLength: 32,
+  iterations: 100000,
+  
+  encrypt: (data, password) => {
+    // Implementation for data encryption
+  },
+  
+  decrypt: (encryptedData, password) => {
+    // Implementation for data decryption
+  }
+};
+```
+
+### Input Validation & Sanitization
+```javascript
+// Validation Schemas with Joi
+const validationSchemas = {
+  user: {
+    register: Joi.object({
+      username: Joi.string().min(3).max(30).alphanum().required(),
+      email: Joi.string().email().required(),
+      password: Joi.string().min(8).pattern(passwordRegex).required(),
+      firstName: Joi.string().max(50).required(),
+      lastName: Joi.string().max(50).required()
+    }),
+    
+    login: Joi.object({
+      email: Joi.string().email().required(),
+      password: Joi.string().required()
+    })
+  },
+  
+  task: {
+    create: Joi.object({
+      title: Joi.string().max(200).required(),
+      description: Joi.string().max(1000).optional(),
+      priority: Joi.string().valid('low', 'medium', 'high', 'urgent').default('medium'),
+      dueDate: Joi.date().optional(),
+      category: Joi.string().max(50).optional(),
+      tags: Joi.array().items(Joi.string().max(30)).max(10).optional()
+    })
+  }
+};
+```
+
+---
+
+## 🚀 Performance Optimization
+
+### Frontend Optimization
+```javascript
+// Code Splitting Strategy dengan Vue + Vite
+import { defineAsyncComponent } from 'vue';
+
+const DashboardView = defineAsyncComponent(() => import('../views/DashboardView.vue'));
+const TasksView = defineAsyncComponent(() => import('../views/TasksView.vue'));
+const CalendarView = defineAsyncComponent(() => import('../views/CalendarView.vue'));
+
+// Virtual Scrolling untuk Large Lists
+// components/tasks/VirtualizedTaskList.vue
+<template>
+  <div ref="containerRef" class="task-list" style="height: 500px; overflow: auto;">
+    <div 
+      class="task-list-inner" 
+      :style="{
+        height: totalHeight + 'px',
+        position: 'relative'
+      }"
+    >
+      <div 
+        v-for="item in visibleTasks" 
+        :key="item.id"
+        :style="{
+          position: 'absolute',
+          top: item.offsetTop + 'px',
+          width: '100%'
+        }"
+      >
+        <TaskItem 
+          :task="item.task"
+          @edit="$emit('edit', $event)"
+          @delete="$emit('delete', $event)"
+        />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
+import TaskItem from './TaskItem.vue';
+import type { Task } from '../../types/task';
+
+const props = defineProps<{
+  tasks: Task[]
+}>();
+
+const rowHeight = 80;
+const buffer = 5;  // Additional rows to render above/below viewport
+const containerRef = ref<HTMLElement | null>(null);
+const scrollTop = ref(0);
+const containerHeight = ref(0);
+
+// Update scroll position
+const handleScroll = () => {
+  if (containerRef.value) {
+    scrollTop.value = containerRef.value.scrollTop;
+  }
+};
+
+// Calculate total list height
+const totalHeight = computed(() => {
+  return props.tasks.length * rowHeight;
+});
+
+// Calculate which tasks should be visible
+const visibleTasks = computed(() => {
+  if (!containerRef.value) return [];
+  
+  const startIndex = Math.max(0, Math.floor(scrollTop.value / rowHeight) - buffer);
+  const endIndex = Math.min(
+    props.tasks.length - 1,
+    Math.ceil((scrollTop.value + containerHeight.value) / rowHeight) + buffer
+  );
+  
+  return props.tasks
+    .slice(startIndex, endIndex + 1)
+    .map((task, i) => ({
+      id: task.id,
+      task,
+      offsetTop: (startIndex + i) * rowHeight
+    }));
+});
+
+// Set up scroll listener
+onMounted(() => {
+  if (containerRef.value) {
+    containerHeight.value = containerRef.value.clientHeight;
+    containerRef.value.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', updateContainerHeight);
+  }
+});
+
+// Clean up scroll listener
+onUnmounted(() => {
+  if (containerRef.value) {
+    containerRef.value.removeEventListener('scroll', handleScroll);
+    window.removeEventListener('resize', updateContainerHeight);
+  }
+});
+
+// Update container height on resize
+const updateContainerHeight = () => {
+  if (containerRef.value) {
+    containerHeight.value = containerRef.value.clientHeight;
+  }
+};
+
+// Update on tasks changes
+watch(() => props.tasks.length, () => {
+  handleScroll();
+});
+</script>
+
+// Memoization dengan Vue
+// Use Vue's built-in memoization with computed properties
+const computedValue = computed(() => {
+  // Expensive calculation here
+  return expensiveOperation(props.data);
+});
+```
+
+### Backend Optimization
+```javascript
+// Database Indexing Strategy
+const indexes = {
+  users: [
+    { email: 1 },
+    { username: 1 },
+    { 'profile.firstName': 1, 'profile.lastName': 1 }
+  ],
+  tasks: [
+    { userId: 1, status: 1 },
+    { userId: 1, dueDate: 1 },
+    { userId: 1, priority: 1, createdAt: -1 },
+    { userId: 1, category: 1 },
+    { 'tags': 1 }
+  ],
+  habits: [
+    { userId: 1, isActive: 1 },
+    { userId: 1, 'logs.date': -1 }
+  ]
+};
+
+// Caching Strategy with Redis
+const cacheConfig = {
+  defaultTTL: 3600, // 1 hour
+  userProfile: 1800, // 30 minutes
+  tasksList: 300,    // 5 minutes
+  analytics: 3600,   // 1 hour
+  aiInsights: 7200   // 2 hours
+};
+
+// Query Optimization
+const optimizedQueries = {
+  getUserTasks: (userId, filters) => {
+    return Task.aggregate([
+      { $match: { userId: ObjectId(userId), ...filters } },
+      { $lookup: { from: 'users', localField: 'userId', foreignField: '_id', as: 'user' } },
+      { $project: { password: 0, 'user.password': 0 } },
+      { $sort: { priority: -1, dueDate: 1 } },
+      { $limit: 50 }
+    ]);
+  }
+};
+```
+
+---
+
+## 📱 Mobile Optimization
+
+### PWA Configuration
+```javascript
+// PWA Manifest
+const manifest = {
+  name: 'FANB - Focus Arrange Notify Balance',
+  short_name: 'FANB',
+  description: 'Your AI-Powered Personal Management Assistant',
+  start_url: '/',
+  display: 'standalone',
+  theme_color: '#3b82f6',
+  background_color: '#ffffff',
+  icons: [
+    {
+      src: '/icons/icon-192x192.png',
+      sizes: '192x192',
+      type: 'image/png'
+    },
+    {
+      src: '/icons/icon-512x512.png',
+      sizes: '512x512',
+      type: 'image/png'
+    }
+  ]
+};
+
+// Service Worker Strategy
+const swConfig = {
+  cacheFirst: ['/static/js/', '/static/css/', '/static/media/'],
+  networkFirst: ['/api/'],
+  staleWhileRevalidate: ['/', '/dashboard', '/tasks', '/calendar'],
+  offlinePages: ['/offline.html']
+};
+```
+
+### Touch Interactions
+```css
+/* Touch-friendly design */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
+}
+
+.swipe-gesture {
+  touch-action: pan-x;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* iOS Safari specific fixes */
+.ios-fix {
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+}
+```
+
+---
+
+## 🧪 Testing Strategy
+
+### Frontend Testing
+```javascript
+// Unit Tests dengan Vitest & Vue Test Utils
+import { describe, it, expect, vi } from 'vitest';
+import { mount } from '@vue/test-utils';
+import TaskItem from '../components/tasks/TaskItem.vue';
+
+describe('TaskItem Component', () => {
+  it('renders task title correctly', () => {
+    const task = { id: '1', title: 'Test Task', status: 'todo' };
+    const wrapper = mount(TaskItem, {
+      props: { task }
+    });
+    expect(wrapper.text()).toContain('Test Task');
+  });
+  
+  it('emits edit event when edit button is clicked', async () => {
+    const task = { id: '1', title: 'Test Task', status: 'todo' };
+    const wrapper = mount(TaskItem, {
+      props: { task }
+    });
+    
+    await wrapper.find('button:first-of-type').trigger('click');
+    expect(wrapper.emitted('edit')).toBeTruthy();
+    expect(wrapper.emitted('edit')[0]).toEqual([task]);
+  });
+});
+
+// Integration Tests
+describe('Task Management Flow', () => {
+  it('creates and displays new task', async () => {
+    // Setup mock store
+    const taskStore = useTaskStore();
+    
+    // Mock API call
+    vi.spyOn(taskStore, 'addTask').mockResolvedValue({
+      id: '123',
+      title: 'New Task',
+      status: 'todo'
+    });
+    
+    // Mount component with router and store
+    const wrapper = mount(TasksView, {
+      global: {
+        plugins: [router, createTestingPinia({
+          createSpy: vi.fn
+        })]
+      }
+    });
+    
+    // Add new task
+    await wrapper.find('[data-test="add-task-button"]').trigger('click');
+    const titleInput = wrapper.find('[data-test="task-title-input"]');
+    await titleInput.setValue('New Task');
+    await wrapper.find('[data-test="save-task-button"]').trigger('click');
+    
+    // Wait for task to be added
+    await flushPromises();
+    
+    // Verify task was added
+    expect(taskStore.addTask).toHaveBeenCalledWith(
+      expect.objectContaining({ title: 'New Task' })
+    );
+    expect(wrapper.text()).toContain('New Task');
+  });
+});
+```
+
+### Backend Testing
+```javascript
+// API Endpoint Tests with Supertest
+describe('Tasks API', () => {
+  test('POST /api/tasks creates new task', async () => {
+    const taskData = {
+      title: 'Test Task',
+      description: 'Test Description',
+      priority: 'high'
+    };
+    
+    const response = await request(app)
+      .post('/api/tasks')
+      .set('Authorization', `Bearer ${userToken}`)
+      .send(taskData)
+      .expect(201);
+    
+    expect(response.body.task.title).toBe(taskData.title);
+    expect(response.body.task.userId).toBe(userId);
+  });
+  
+  test('GET /api/tasks returns user tasks only', async () => {
+    const response = await request(app)
+      .get('/api/tasks')
+      .set('Authorization', `Bearer ${userToken}`)
+      .expect(200);
+    
+    expect(response.body.tasks).toBeInstanceOf(Array);
+    response.body.tasks.forEach(task => {
+      expect(task.userId).toBe(userId);
+    });
+  });
+});
+```
+
+---
+
+## 🚢 Deployment & DevOps
+
+### Docker Configuration
+```dockerfile
+# Frontend Dockerfile
+FROM node:18-alpine AS build
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . .
+RUN npm run build
+
+FROM nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/nginx.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+```dockerfile
+# Backend Dockerfile
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . .
+EXPOSE 3001
+CMD ["node", "src/app.js"]
+```
+
+### Docker Compose
+```yaml
+version: '3.8'
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    environment:
+      - REACT_APP_API_URL=http://localhost:3001/api
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://mongo:27017/fanb
+      - JWT_SECRET=${JWT_SECRET}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    depends_on:
+      - mongo
+      - redis
+
+  mongo:
+    image: mongo:6.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  mongo_data:
+  redis_data:
+```
+
+### Environment Variables
+```bash
+# .env.example
+NODE_ENV=development
+PORT=3001
+
+# Database
+MONGODB_URI=mongodb://localhost:27017/fanb
+MONGO_USERNAME=fanb_user
+MONGO_PASSWORD=secure_password
+
+# JWT
+JWT_SECRET=your_super_secure_jwt_secret_key_here
+JWT_ACCESS_EXPIRY=15m
+JWT_REFRESH_EXPIRY=7d
+
+# AI Integration
+GEMINI_API_KEY=your_gemini_api_key_here
+
+# Email Service
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your_email@gmail.com
+SMTP_PASS=your_app_password
+
+# Redis
+REDIS_URL=redis://localhost:6379
+
+# File Upload
+UPLOAD_MAX_SIZE=10485760  # 10MB
+UPLOAD_ALLOWED_TYPES=image/jpeg,image/png,image/gif,application/pdf
+
+# Security
+RATE_LIMIT_WINDOW=900000  # 15 minutes
+RATE_LIMIT_MAX=100
+BCRYPT_ROUNDS=12
+
+# Frontend URLs
+CLIENT_URL=http://localhost:3000
+ADMIN_URL=http://localhost:3000/admin
+```
+
+---
+
+## 📋 Implementation Checklist
+
+### Phase 1: Foundation (Week 1-2)
+- [x] Project setup and structure
+- [x] Database schema implementation
+- [x] Basic authentication system
+- [x] Core API endpoints (CRUD operations)
+- [x] Frontend routing and layout
+- [x] Basic UI components library
+
+### Phase 2: Core Features (Week 3-4)
+- [x] Task management system
+- [x] Calendar integration
+- [x] User dashboard
+- [x] Basic habit tracking
+- [x] File upload functionality
+- [x] Real-time notifications
+
+### Phase 3: AI Integration (Week 5-6)
+- [ ] Gemini AI service integration
+- [ ] Chat interface implementation
+- [ ] AI-powered insights
+- [ ] Smart recommendations
+- [ ] Natural language processing
+
+### Phase 4: Advanced Features (Week 7-8)
+- [ ] Analytics and reporting
+- [ ] Data visualization
+- [ ] Export/import functionality
+- [ ] Advanced habit tracking
+- [ ] Collaboration features
+
+### Phase 5: Optimization & Testing (Week 9-10)
+- [ ] Performance optimization
+- [ ] Comprehensive testing
+- [ ] Security audit
+- [ ] Mobile responsiveness
+- [ ] PWA implementation
+
+### Phase 6: Deployment & Launch (Week 11-12)
+- [ ] Production deployment
+- [ ] CI/CD pipeline setup
+- [ ] Monitoring and logging
+- [ ] Documentation completion
+- [ ] User onboarding flow
+
+---
+
+## 🔧 Development Commands
+
+```bash
+# Setup Development Environment
+npm install
+docker-compose up -d
+# Frontend development
+npm run dev       # Jalankan Vite dev server
+# Backend development
+npm run server    # Jalankan backend server
+
+# Database Operations
+npm run db:seed        # Seed initial data
+npm run db:migrate     # Run migrations
+npm run db:backup      # Backup database
+
+# Testing
+npm run test           # Run all tests
+npm run test:unit      # Unit tests only
+npm run test:integration # Integration tests
+npm run test:e2e       # End-to-end tests
+npm run test:coverage  # Coverage report
+
+# Build & Deployment
+npm run build          # Production build
+npm run docker:build   # Build Docker images
+npm run deploy:staging # Deploy to staging
+npm run deploy:prod    # Deploy to production
+
+# Code Quality
+npm run lint           # ESLint check
+npm run lint:fix       # Fix linting issues
+npm run format         # Prettier format
+npm run type-check     # TypeScript check
+```
+
+This completes the comprehensive development specification for the FANB application. The specification covers all aspects from database design to deployment, providing a complete roadmap for building a production-ready personal management platform with AI integration.
+
+// Example Pinia Store
+```typescript
+// stores/task.ts
+import { defineStore } from 'pinia';
+import { ref, computed } from 'vue';
+import type { Task, TaskStatus, TaskPriority } from '../types/task';
+import * as taskService from '../services/tasks';
+
+export const useTaskStore = defineStore('tasks', () => {
+  // State
+  const tasks = ref<Task[]>([]);
+  const isLoading = ref(false);
+  const error = ref<string | null>(null);
+  
+  // Getters
+  const completedTasks = computed(() => {
+    return tasks.value.filter(task => task.status === 'completed');
+  });
+  
+  const pendingTasks = computed(() => {
+    return tasks.value.filter(task => task.status === 'todo');
+  });
+  
+  const tasksByPriority = computed(() => {
+    return (priority: TaskPriority) => {
+      return tasks.value.filter(task => task.priority === priority);
+    };
+  });
+  
+  // Actions
+  async function fetchTasks() {
+    isLoading.value = true;
+    error.value = null;
+    
+    try {
+      const data = await taskService.getTasks();
+      tasks.value = data;
+    } catch (err: any) {
+      error.value = err.message || 'Failed to fetch tasks';
+      console.error('Error fetching tasks:', err);
+    } finally {
+      isLoading.value = false;
+    }
+  }
+  
+  async function addTask(taskData: Partial<Task>): Promise<Task> {
+    isLoading.value = true;
+    error.value = null;
+    
+    try {
+      const newTask = await taskService.createTask(taskData);
+      tasks.value.push(newTask);
+      return newTask;
+    } catch (err: any) {
+      error.value = err.message || 'Failed to add task';
+      console.error('Error adding task:', err);
+      throw err;
+    } finally {
+      isLoading.value = false;
+    }
+  }
+  
+  async function updateTask(id: string, updates: Partial<Task>): Promise<Task> {
+    isLoading.value = true;
+    error.value = null;
+    
+    try {
+      const updatedTask = await taskService.updateTask(id, updates);
+      const index = tasks.value.findIndex(t => t.id === id);
+      if (index !== -1) {
+        tasks.value[index] = updatedTask;
+      }
+      return updatedTask;
+    } catch (err: any) {
+      error.value = err.message || 'Failed to update task';
+      console.error('Error updating task:', err);
+      throw err;
+    } finally {
+      isLoading.value = false;
+    }
+  }
+  
+  async function removeTask(id: string): Promise<void> {
+    isLoading.value = true;
+    error.value = null;
+    
+    try {
+      await taskService.deleteTask(id);
+      tasks.value = tasks.value.filter(t => t.id !== id);
+    } catch (err: any) {
+      error.value = err.message || 'Failed to delete task';
+      console.error('Error deleting task:', err);
+      throw err;
+    } finally {
+      isLoading.value = false;
+    }
+  }
+  
+  function clearError() {
+    error.value = null;
+  }
+  
+  return {
+    tasks,
+    isLoading,
+    error,
+    completedTasks,
+    pendingTasks,
+    tasksByPriority,
+    fetchTasks,
+    addTask,
+    updateTask,
+    removeTask,
+    clearError
+  };
+});
+```
